@@ -1,15 +1,24 @@
 import mongoose, { Schema } from 'mongoose';
 
 const UrlSchema = new Schema({
-  real_url: {
-    type: String,
-    unique: true
-  },
-  short_url: {
+  longUrl: { type: String, unique: true, required: true },
+  shortUrl: {
     type: String,
     maxlength: [6, 'Error with the length!'],
     unique: true
   }
 });
 
-export default mongoose.model('Url', UrlSchema);
+const makeUniqueUrl = url => {
+
+}
+
+UrlSchema.pre('save', function(next) {
+  makeUniqueUrl(this.longUrl);
+  this.shortUrl = '123457';
+  next();
+});
+
+const Url = mongoose.model('Url', UrlSchema);
+
+export default Url;
