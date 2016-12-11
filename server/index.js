@@ -1,7 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import morgan from 'morgan';
 import config from './config';
+import urlRoutes from './modules/url/UrlRoutes';
 
 const { MONGO_URL, PORT } = config;
 /*
@@ -16,10 +18,14 @@ mongoose.connection
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   res.send('Hello');
 });
+
+app.use('/api/v1', [urlRoutes]);
 
 app.listen(PORT, err => {
   if (err) return console.log(err); // eslint-disable-line
