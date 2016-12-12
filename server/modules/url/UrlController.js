@@ -2,13 +2,20 @@ import { isURL } from 'validator';
 import Url from './UrlModel';
 
 export const createShort = (req, res) => {
-  const { longUrl } = req.body;
+  let longUrl = req.body.longUrl;
 
   // validation
   if (!longUrl) {
     return res.status(400).json({ success: false, message: 'You must provided a url!' });
   } else if (!isURL(longUrl)) {
     return res.status(400).json({ success: false, message: 'You must provided a valid url!' });
+  }
+
+  // if user send url who don't have http we need to match the db
+  const pattern = /^((http|https|ftp):\/\/)/;
+
+  if (!pattern.test(longUrl)) {
+    longUrl = `http://${longUrl}`; // eslint-disable-line
   }
 
   // search if we have already a url save
