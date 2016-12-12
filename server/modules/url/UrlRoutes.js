@@ -3,6 +3,7 @@ import * as Url from './UrlController';
 
 const urlRoute = new Router();
 
-urlRoute.route('/shorten').post(Url.createShort);
+urlRoute.route('/api/v1/shorten').post(Url.createShort);
+urlRoute.route('/:shortUrl').get(Url.redirectLong);
 
 export default urlRoute;
