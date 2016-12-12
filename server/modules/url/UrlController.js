@@ -11,8 +11,10 @@ export const createShort = (req, res) => {
     return res.status(400).json({ success: false, message: 'You must provided a valid url!' });
   }
 
-  Url.findOne({ longUrl })
+  // search if we have already a url save
+  return Url.findOne({ longUrl })
     .then(url => {
+      // if not we created a new one
       if (!url) {
         const newUrl = new Url({ longUrl });
         return newUrl.save()
@@ -25,7 +27,21 @@ export const createShort = (req, res) => {
             return res.status(400).json({ success: false, errors });
           });
       }
+      // if yes we return the url
       return res.status(200).json({ success: true, url });
     })
     .catch(err => res.status(400).json({ success: false, message: err }));
+};
+
+export const redirectLong = (req, res) => {
+  const { shortUrl } = req.params;
+
+  return Url.findOne({ shortUrl })
+    .then(url => {
+      // if we dont find a url we redirect back to home page
+      if (!url) { return res.redirect('/').json({ success: false, message: 'This url not exist in the system' }); }
+      // we redirect to external url
+      return res.redirect(url.longUrl);
+    })
+    .catch(err => res.redirect('/').json({ success: false, message: err }));
 };
