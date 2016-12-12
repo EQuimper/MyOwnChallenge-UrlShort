@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import path from 'path';
 import morgan from 'morgan';
 import config from './config';
 import urlRoutes from './modules/url/UrlRoutes';
@@ -21,11 +22,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
+app.use(express.static(path.join(__dirname, '../public')));
+
 app.get('/', (req, res) => {
-  res.send('Hello');
+  res.sendFile(path.join(__dirname, '../public/views/index.html'));
 });
 
-app.use('/api/v1', [urlRoutes]);
+app.use([urlRoutes]);
 
 app.listen(PORT, err => {
   if (err) return console.log(err); // eslint-disable-line
