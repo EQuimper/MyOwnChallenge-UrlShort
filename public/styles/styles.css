@@ -1,9 +1,11 @@
 body {
   background-color: #ffffff;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 .title-wrapper {
-  margin-top: 8%;
+  margin-top: 10%;
   text-align: center;
 }
 
@@ -56,4 +58,48 @@ footer {
 
 .fa-gratipay {
   color: #F45B69;
+}
+
+@media only screen and (max-width: 550px) {
+  .input-wrapper {
+    margin-top: 10%;
+  }
+
+  .title-wrapper {
+    margin-top: 17%;
+    text-align: center;
+  }
+
+  .result-wrapper {
+    margin-top: 10%;
+    text-align: center;
+  }
+
+  .github-link {
+    margin-top: 25%;
+    text-align: center;
+    color: #4c4c4c;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .input-wrapper {
+    margin-top: 10%;
+  }
+
+  .title-wrapper {
+    margin-top: 10%;
+    text-align: center;
+  }
+
+  .result-wrapper {
+    margin-top: 10%;
+    text-align: center;
+  }
+
+  .github-link {
+    margin-top: 15%;
+    text-align: center;
+    color: #4c4c4c;
+  }
 }

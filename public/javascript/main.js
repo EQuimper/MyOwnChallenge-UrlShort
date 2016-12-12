@@ -65,7 +65,7 @@ const resetClick = function() {
 
 const resetAppear = function() {
   const resetHTML = '<button class="btn btn-danger btn-lg" id="reset-btn">Reset</button>';
-  $('.github-link').css('margin-top', '5%');
+  $('.github-link').css('margin-top', '3%');
   $('#reset-link').html(resetHTML)
   $('#reset-link').hide().fadeIn('slow');
   $('#reset-btn').click(resetClick);
