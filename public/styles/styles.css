@@ -1,0 +1,29 @@
+body {
+  background-color: #DE6449;
+}
+
+.title-wrapper {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.input-wrapper {
+  margin-top: 3%;
+}
+
+.glyphicon-link {
+  margin-top: 3%;
+  font-size: 3em;
+  color: #ffffff;
+}
+
+.result-wrapper {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.result {
+  color: #ffffff;
+  text-decoration: underline;
+  font-size: 2em;
+}
