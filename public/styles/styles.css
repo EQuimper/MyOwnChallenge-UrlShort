@@ -1,5 +1,5 @@
 body {
-  background-color: #E98A15;
+  background-color: #ffffff;
 }
 
 .title-wrapper {
@@ -14,7 +14,7 @@ body {
 .glyphicon-link {
   margin-top: 3%;
   font-size: 3em;
-  color: #ffffff;
+  color: #4c4c4c;
 }
 
 .result-wrapper {
@@ -23,7 +23,7 @@ body {
 }
 
 .result {
-  color: #ffffff;
+  color: #4c4c4c;
   text-decoration: underline;
   font-size: 2em;
 }
