@@ -36,12 +36,14 @@ const successClick = function(data) {
   $('input[name=url]').parent().addClass('has-success');
   $('#btn-short').unbind('click.shorten');
   new Clipboard('#btn-short');
-  $('#btn-short').attr('data-clipboard-target', '#url-to-short');
   $('#btn-short').html('<i class="fa fa-clipboard" aria-hidden="true"></i>');
-  $('#btn-short').prop('data-toggle', 'tooltip');
   $('#btn-short').addClass('btn-success');
-  $('#btn-short').prop('data-placement', 'right');
-  $('#btn-short').prop('title', 'Copy to clipboard');
+  $('#btn-short').attr({
+    'data-placement': 'right',
+    'data-clipboard-target': '#url-to-short',
+    'data-toggle': 'tooltip',
+    'title': 'Copy to clipboard'
+  });
   $('#btn-short').tooltip();
 }
 
@@ -50,16 +52,19 @@ const resetClick = function() {
   $('#btn-short').bind('click.shorten', shorten);
   $('input[name=url]').val('');
   $('input[name=url]').prop('readOnly', null);
-  $('#btn-short').attr('data-clipboard-target', null);
   $('#btn-short').html('Short Need');
-  $('#btn-short').prop('data-toggle', null);
-  $('#btn-short').prop('data-placement', null);
-  $('#btn-short').prop('title', null);
-  $('#btn-short').prop('disabled', null);
-  $('#btn-short').removeClass('btn-success');
-  $('#btn-short').removeClass('btn-danger');
-  $('input[name=url]').parent().removeClass('has-error');
-  $('input[name=url]').parent().removeClass('has-success');
+  $('#btn-short').removeClass('btn-success btn-danger');
+  // cancel tooltip
+  $('#btn-short').tooltip('disable');
+  // remove add attributes
+  $('#btn-short').attr({
+    'data-toggle': null,
+    'data-placement': null,
+    'title': null,
+    'disabled': null,
+    'data-clipboard-target': null
+  });
+  $('input[name=url]').parent().removeClass('has-error has-success');
   $('.github-link').css('margin-top', '');
 };
 
