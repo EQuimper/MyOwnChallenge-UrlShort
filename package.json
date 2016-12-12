@@ -29,6 +29,7 @@
     "mongoose": "^4.7.2",
     "morgan": "^1.7.0",
     "node-uuid": "^1.4.7",
+    "nodemon": "^1.11.0",
     "validator": "^6.2.0"
   }
 }
