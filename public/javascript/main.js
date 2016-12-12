@@ -2,7 +2,7 @@
 
 $(function() {
   $('#btn-short').bind('click.shorten', shorten);
-})
+});
 
 const shorten = function() {
   $.ajax({
@@ -40,9 +40,9 @@ const successClick = function(data) {
   $('#btn-short').addClass('btn-success');
   $('#btn-short').attr({
     'data-placement': 'right',
+    'data-original-title': 'Copy to clipboard',
     'data-clipboard-target': '#url-to-short',
     'data-toggle': 'tooltip',
-    'title': 'Copy to clipboard'
   });
   $('#btn-short').tooltip();
 }
@@ -54,13 +54,11 @@ const resetClick = function() {
   $('input[name=url]').prop('readOnly', null);
   $('#btn-short').html('Short Need');
   $('#btn-short').removeClass('btn-success btn-danger');
-  // cancel tooltip
-  $('#btn-short').tooltip('disable');
   // remove add attributes
+  $('#btn-short').removeAttr('data-toggle title');
   $('#btn-short').attr({
-    'data-toggle': null,
     'data-placement': null,
-    'title': null,
+    'data-original-title': null,
     'disabled': null,
     'data-clipboard-target': null
   });
