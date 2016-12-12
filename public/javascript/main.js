@@ -8,7 +8,7 @@ $('#btn-short').on('click', function() {
     data: { longUrl: $('#url-to-short').val() },
     success: function(data) {
       const resultHTML = '<a class="result" href="' + data.url.shortUrl + '">'
-          + 'http://shneed.com/' + data.url.shortUrl + '</a>';
+          + 'shneed.com/' + data.url.shortUrl + '</a>';
       $('#link').html(resultHTML);
       $('#link').hide().fadeIn('slow');
     }
