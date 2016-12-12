@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShortMeThis</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+  <div class="container title-wrapper">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h1 style="color: #ffffff;">ShortMeThis Url</h1>
+      </div>
+      <div class="col-md-6 col-md-offset-3">
+        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container input-wrapper">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="input-group">
+          <input type="text" name="url" id="url-to-short" placeholder="Paste your url..." class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" id="btn-short" type="button">Short this</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-offset-2 result-wrapper">
+        <div id="link"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/javascript/main.js"></script>
+</body>
+</html>
