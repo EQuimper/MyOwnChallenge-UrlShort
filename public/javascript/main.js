@@ -12,7 +12,7 @@ $('#btn-short').on('click', function() {
         console.log(data);
         // display the shortened URL to the user that is returned by the server
         var resultHTML = '<a class="result" href="' + data.url.shortUrl + '">'
-            + 'http:localhost:3000/' + data.url.shortUrl + '</a>';
+            + 'https://shortmethis.herokuapp.com/' + data.url.shortUrl + '</a>';
         $('#link').html(resultHTML);
         $('#link').hide().fadeIn('slow');
     }
