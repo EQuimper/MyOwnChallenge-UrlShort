@@ -3,7 +3,7 @@ body {
 }
 
 .title-wrapper {
-  margin-top: 10%;
+  margin-top: 8%;
   text-align: center;
 }
 
@@ -26,4 +26,19 @@ body {
   color: #4c4c4c;
   text-decoration: underline;
   font-size: 2em;
+}
+
+.github-link {
+  text-align: center;
+  color: #4c4c4c;
+}
+
+.github-icon {
+  margin-top: 2%;
+  color: #4c4c4c;
+}
+
+.github-icon:hover {
+  margin-top: 2%;
+  color: #F45B69;
 }
