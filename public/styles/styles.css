@@ -45,6 +45,11 @@ body {
   color: #F45B69;
 }
 
+#btn-short {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
 footer {
   text-align: center;
   position: absolute;
