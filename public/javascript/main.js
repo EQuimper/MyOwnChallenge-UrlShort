@@ -1,75 +1,60 @@
 /* eslint-disable */
 
-$(function() {
-  $('#btn-short').bind('click.shorten', shorten);
-});
+axios.defaults.baseURL = '/api/v1';
 
-const shorten = () => {
-  $.ajax({
-    url: '/api/v1/shorten',
-    type: 'POST',
-    dataType: 'JSON',
-    data: { longUrl: $('#url-to-short').val() },
-    success: data => {
-      successClick(data);
-      resetAppear();
+const app = new Vue({
+  el: '#app',
+  data: {
+    url: '',
+    getShort: false,
+    top5Lists: [],
+    loading: false,
+    error: false,
+    loadingPrc: 0,
+    loadingClass: 'progress-bar progress-bar-striped active'
+  },
+  created: function () {
+    this.loading = true;
+  },
+  mounted: function () {
+    $('#btn-short').tooltip();
+    new Clipboard('#btn-short');
+    axios.get('/getTop5', {
+      onDownloadProgress: e => {
+        console.log(e.loaded);
+        console.log(e.total);
+        console.log(e);
+        if (e.lengthComputable) {
+          this.loadingPrc = e.loaded / e.total;
+          console.log(this.loadingPrc);
+        }
+      }
+    })
+      .then(
+        res => {
+          this.top5Lists = res.data.urls;
+          this.loading = false;
+        },
+        err => {
+          this.loading = false
+          this.error = true;
+        }
+      )
+  },
+  methods: {
+    urlSub: function (e) {
+      axios.post('/shorten', { longUrl: this.url })
+        .then(
+          res => {
+            this.getShort = true;
+            this.url = `http://localhost:3000/${res.data.url.shortUrl}`;
+          },
+          err => console.log(err)
+        )
     },
-    error: err => {
-      errorAppear(err);
-      resetAppear();
+    reset: function() {
+      this.url = '',
+      this.getShort = false
     }
-  });
-};
-
-const errorAppear = err => {
-  $('input[name=url]').parent().addClass('has-error');
-  $('input[name=url]').val(err.responseJSON.message);
-  $('input[name=url]').prop('readOnly', true);
-  $('#btn-short').prop('disabled', true);
-  $('#btn-short').html('Error Happen');
-  $('#btn-short').addClass('btn-danger');
-}
-
-const successClick = function(data) {
-  $('input[name=url]').val(`shneed.com/${data.url.shortUrl}`);
-  $('input[name=url]').prop('readOnly', true);
-  $('input[name=url]').parent().addClass('has-success');
-  $('#btn-short').unbind('click.shorten');
-  new Clipboard('#btn-short');
-  $('#btn-short').html('<i class="fa fa-clipboard" aria-hidden="true"></i>');
-  $('#btn-short').addClass('btn-success');
-  $('#btn-short').attr({
-    'data-placement': 'right',
-    'data-original-title': 'Copy to clipboard',
-    'data-clipboard-target': '#url-to-short',
-    'data-toggle': 'tooltip',
-  });
-  $('#btn-short').tooltip();
-}
-
-const resetClick = () => {
-  $('#reset-link').empty();
-  $('#btn-short').bind('click.shorten', shorten);
-  $('input[name=url]').val('');
-  $('input[name=url]').prop('readOnly', null);
-  $('#btn-short').html('Short Need');
-  $('#btn-short').removeClass('btn-success btn-danger');
-  // remove add attributes
-  $('#btn-short').removeAttr('data-toggle title');
-  $('#btn-short').attr({
-    'data-placement': null,
-    'data-original-title': null,
-    'disabled': null,
-    'data-clipboard-target': null
-  });
-  $('input[name=url]').parent().removeClass('has-error has-success');
-  $('.github-link').css('margin-top', '');
-};
-
-const resetAppear = () => {
-  const resetHTML = '<button class="btn btn-danger btn-lg" id="reset-btn">Reset</button>';
-  $('.github-link').css('margin-top', '3%');
-  $('#reset-link').html(resetHTML)
-  $('#reset-link').hide().fadeIn('slow');
-  $('#reset-btn').click(resetClick);
-}
+  }
+});

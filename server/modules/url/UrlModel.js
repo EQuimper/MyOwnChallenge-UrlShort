@@ -7,18 +7,18 @@ const UrlSchema = new Schema({
     type: String,
     maxlength: [6, 'Error with the length!'],
     unique: true
-  }
+  },
+  visits: { type: Number, default: 0 }
 });
 
 // function for make a unique shortUrl
-const makeUniqueUrl = len => {
-  return crypto
+const makeUniqueUrl = len =>
+  crypto
     .randomBytes(Math.ceil(len * (3 / 4)))
     .toString('base64')
     .slice(0, len)
     .replace(/\+/g, '0')
     .replace(/\//g, '0');
-};
 
 // function for add http in front of url who don't have it
 // we need that for redirect external

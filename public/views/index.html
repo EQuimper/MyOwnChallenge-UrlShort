@@ -24,27 +24,81 @@
     </div>
   </div>
 
-  <div class="container input-wrapper">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-        <div class="input-group input-group-lg">
-          <input type="text" name="url" id="url-to-short" placeholder="Paste your url..." class="form-control">
-          <span class="input-group-btn">
-            <button class="btn btn-primary" id="btn-short" type="button">Short Need</button>
-          </span>
+  <div id="app">
+    <div class="container input-wrapper">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+          <div class="input-group input-group-lg">
+            <input
+              v-model="url"
+              type="text"
+              name="url"
+              id="url-to-short"
+              placeholder="Paste your url..."
+              class="form-control"
+              :value="url"
+            >
+            <span class="input-group-btn">
+              <button id="btn-long" v-show="!getShort" :disabled="!url" v-on:click="urlSub" class="btn btn-primary" type="button">
+                Short Need
+              </button>
+              <button
+                v-show="getShort"
+                id="btn-short"
+                class="btn btn-success"
+                data-placement="right"
+                title="Copy to clipboard"
+                data-toggle="tooltip"
+                data-clipboard-target="#url-to-short"
+                type="button"
+              >
+                Copy
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 result-wrapper">
+          <div id="reset-link" v-show="getShort">
+            <button v-on:click="reset" class="btn btn-danger btn-lg" id="reset-btn">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2" id="visitsContainer">
+          <hr>
+          <br>
+          <div v-if="loading" class="progress">
+            <div
+              class="progress-bar progress-bar-info progress-bar-striped active"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              v-bind:style="{width: loadingPrc + '%'}"
+            >
+              {{loadingPrc}}%
+            </div>
+          </div>
+          <div v-else-if="!error">
+            <h5 class="text-center">Top 5 most visits ShortNeed link</h5>
+            <ul class="list-group" id="topVisits">
+              <a v-for="url in top5Lists" :href="url.shortUrl" class="list-group-item">
+                <span class="badge">{{url.visits}}</span>
+                {{url.longUrl}}
+              </a>
+            </ul>
+          </div>
+          <div v-else class="alert alert-danger" role="alert">
+            Something wrong happen! Plz Refresh!
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 result-wrapper">
-        <div id="reset-link"></div>
-      </div>
-    </div>
-  </div>
-
 
   <footer>
     <div class="container">
@@ -59,6 +113,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="/javascript/main.js"></script>
   <script>
@@ -69,7 +125,6 @@
 
     ga('create', 'UA-88826356-1', 'auto');
     ga('send', 'pageview');
-
   </script>
 </body>
 </html>
