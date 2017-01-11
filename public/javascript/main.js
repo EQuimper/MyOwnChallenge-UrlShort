@@ -4,24 +4,24 @@ $(function() {
   $('#btn-short').bind('click.shorten', shorten);
 });
 
-const shorten = function() {
+const shorten = () => {
   $.ajax({
     url: '/api/v1/shorten',
     type: 'POST',
     dataType: 'JSON',
     data: { longUrl: $('#url-to-short').val() },
-    success: function(data) {
+    success: data => {
       successClick(data);
       resetAppear();
     },
-    error: function(err) {
+    error: err => {
       errorAppear(err);
       resetAppear();
     }
   });
 };
 
-const errorAppear = function(err) {
+const errorAppear = err => {
   $('input[name=url]').parent().addClass('has-error');
   $('input[name=url]').val(err.responseJSON.message);
   $('input[name=url]').prop('readOnly', true);
@@ -47,7 +47,7 @@ const successClick = function(data) {
   $('#btn-short').tooltip();
 }
 
-const resetClick = function() {
+const resetClick = () => {
   $('#reset-link').empty();
   $('#btn-short').bind('click.shorten', shorten);
   $('input[name=url]').val('');
@@ -66,7 +66,7 @@ const resetClick = function() {
   $('.github-link').css('margin-top', '');
 };
 
-const resetAppear = function() {
+const resetAppear = () => {
   const resetHTML = '<button class="btn btn-danger btn-lg" id="reset-btn">Reset</button>';
   $('.github-link').css('margin-top', '3%');
   $('#reset-link').html(resetHTML)
