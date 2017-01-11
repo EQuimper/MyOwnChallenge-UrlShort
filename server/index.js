@@ -10,6 +10,12 @@ const app = express();
 
 app.use(compression());
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+
+app.use([urlRoutes]);
+
 const PORT = process.env.PORT || 3000;
 
 let mongoConf;
@@ -37,12 +43,6 @@ mongoose.connect(mongoConf);
 mongoose.connection
   .once('open', () => console.log(`Connected to MongoDb`)) // eslint-disable-line
   .on('error', err => console.warn('Warning', err)); // eslint-disable-line
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('dev'));
-
-app.use([urlRoutes]);
 
 app.listen(PORT, err => {
   if (err) return console.log(err); // eslint-disable-line
