@@ -10,8 +10,7 @@ import urlRoutes from './modules/url/UrlRoutes';
 const app = express();
 
 app.use(compression());
-
-app.use(favicon(__dirname + '../src/imgs/favicon.ico'));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 const PORT = process.env.PORT || 3000;
 
