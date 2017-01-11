@@ -45,7 +45,7 @@ export const redirectLong = (req, res) => {
 
   console.log('HELLO', { shortUrl });
 
-  return Url.findOneAndUpdate({ shortUrl })
+  return Url.findOne({ shortUrl })
     .then(url => {
       // if we dont find a url we redirect back to home page
       if (!url) { return res.redirect('/').json({ success: false, message: 'This url not exist in the system' }); }
