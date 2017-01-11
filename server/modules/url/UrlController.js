@@ -57,7 +57,7 @@ export const redirectLong = (req, res) => {
 };
 
 export const get5Recents = (req, res) =>
-  Url.find({})
+  Url.find({ longUrl: { $not: /porn/ } })
     .sort({ createdAt: -1 })
     .limit(5)
     .then(
