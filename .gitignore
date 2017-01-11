@@ -1,7 +1,3 @@
 node_modules/
 .vscode/
-<<<<<<< HEAD
-server/config
-=======
 .env
->>>>>>> heroku
