@@ -43,6 +43,8 @@ export const createShort = (req, res) => {
 export const redirectLong = (req, res) => {
   const { shortUrl } = req.params;
 
+  console.log('HELLO', { shortUrl });
+
   return Url.findOneAndUpdate({ shortUrl })
     .then(url => {
       // if we dont find a url we redirect back to home page
