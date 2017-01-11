@@ -1,6 +1,5 @@
 body {
   background-color: #ffffff;
-  position: relative;
   height: 100vh;
 }
 
@@ -18,7 +17,6 @@ body {
 }
 
 .title-wrapper {
-  /*margin-top: 5%;*/
   text-align: center;
 }
 
@@ -73,6 +71,10 @@ footer {
   background-color: #efefef;
   text-align: center;
 }
+
+/*footer > .container {
+  position: relative;
+}*/
 
 .fa-gratipay {
   color: #F45B69;
