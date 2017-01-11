@@ -6,13 +6,27 @@ import compression from 'compression';
 import morgan from 'morgan';
 import urlRoutes from './modules/url/UrlRoutes';
 
+const app = express();
+
+app.use(compression());
+
 const PORT = process.env.PORT || 3000;
 
 let mongoConf;
 
 if (process.env.NODE_ENV !== 'production') {
+  const webpackMiddleware = require('webpack-dev-middleware');
+  const webpack = require('webpack');
+  const webpackConfig = require('../webpack.config');
+
+  app.use(webpackMiddleware(webpack(webpackConfig)));
   mongoConf = 'mongodb://localhost/url';
 } else {
+  console.log('Hello');
+  app.use(express.static('dist'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.joint(__dirname, 'dist/index.html'));
+  });
   mongoConf = process.env.MONGO_URL;
 }
 
@@ -25,18 +39,15 @@ mongoose.connection
   .once('open', () => console.log(`Connected to MongoDb`)) // eslint-disable-line
   .on('error', err => console.warn('Warning', err)); // eslint-disable-line
 
-const app = express();
-
-app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/views/index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public/views/index.html'));
+// });
 
 app.use([urlRoutes]);
 

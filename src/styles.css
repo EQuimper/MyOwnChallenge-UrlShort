@@ -1,12 +1,19 @@
 body {
   background-color: #ffffff;
-  /*min-height: 100vh;*/
-  /*overflow: scroll;*/
 }
 
-/*a {
-  color: #333333;
-}*/
+#list-urls {
+  margin-top: 1em;
+}
+
+#loading-spinner {
+  animation: loading-spinner-spin infinite 2s linear;
+}
+
+@keyframes loading-spinner-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
 .title-wrapper {
   margin-top: 5%;
