@@ -14,7 +14,7 @@ module.exports = {
     vendor: VENDOR_LIBS
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].[chunkhash].js'
   },
   module: {
@@ -34,7 +34,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest']
