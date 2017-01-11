@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
   mongoConf = 'mongodb://localhost/url';
 } else {
   app.use(express.static('dist'));
-  app.get('/', (req, res) => {
+  app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
   mongoConf = process.env.MONGO_URL;
@@ -41,7 +41,6 @@ mongoose.connection
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-
 
 app.use([urlRoutes]);
 
