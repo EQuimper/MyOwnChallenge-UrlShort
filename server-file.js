@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import compression from 'compression';
 import morgan from 'morgan';
-import urlRoutes from './modules/url/UrlRoutes';
+import urlRoutes from './server/modules/url/UrlRoutes';
 
 const app = express();
 
@@ -17,14 +17,14 @@ let mongoConf;
 if (process.env.NODE_ENV !== 'production') {
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpack = require('webpack');
-  const webpackConfig = require('../webpack.config');
+  const webpackConfig = require('./webpack.config');
 
   app.use(webpackMiddleware(webpack(webpackConfig)));
   mongoConf = 'mongodb://localhost/url';
 } else {
-  // app.use(express.static(path.join(__dirname, '../dist')));
+  app.use(express.static('dist'));
   app.get('/', (req, res) => {
-    res.sendFile(path.join('../dist/index.html', { root: __dirname }));
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
   mongoConf = process.env.MONGO_URL;
 }
@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-app.use(express.static(path.join(__dirname, '../public')));
+// app.use(express.static(path.join(__dirname, '../public')));
 
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../public/views/index.html'));
