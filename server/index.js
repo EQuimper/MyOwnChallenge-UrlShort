@@ -3,12 +3,15 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import path from 'path';
 import compression from 'compression';
+import favicon from 'serve-favicon';
 import morgan from 'morgan';
 import urlRoutes from './modules/url/UrlRoutes';
 
 const app = express();
 
 app.use(compression());
+
+app.use(favicon(path.join(__dirname, '/src/imgs/favicon.ico')));
 
 const PORT = process.env.PORT || 3000;
 
