@@ -13,6 +13,8 @@ let mongoConf;
 if (process.env.NODE_ENV !== 'production') {
   mongoConf = 'mongodb://localhost/url';
 } else {
+  require('dotenv').config();
+
   mongoConf = process.env.MONGO_URL;
 }
 
