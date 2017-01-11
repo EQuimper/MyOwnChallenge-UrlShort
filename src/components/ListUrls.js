@@ -19,7 +19,14 @@ const ListUrls = ({ data, loading, loadingDots, error }) => (
           <ul className="list-group">
             {data.map((url, i) => (
               <a href={url.shortUrl} className="list-group-item" key={i}>
-                {url.longUrl}
+                <div className="row">
+                  <div className="col-md-11">
+                    {url.longUrl}
+                  </div>
+                  <div className="col-md-1">
+                    {url.visits} <i className="fa fa-line-chart" />
+                  </div>
+                </div>
               </a>
             ))}
           </ul>

@@ -7,7 +7,8 @@ const UrlSchema = new Schema({
     type: String,
     maxlength: [6, 'Error with the length!'],
     unique: true
-  }
+  },
+  visits: { type: Number, default: 0 }
 }, { timestamps: true });
 
 // function for make a unique shortUrl
