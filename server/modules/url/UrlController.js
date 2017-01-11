@@ -50,6 +50,7 @@ export const redirectLong = (req, res) => {
       // if we dont find a url we redirect back to home page
       if (!url) { return res.redirect('/').json({ success: false, message: 'This url not exist in the system' }); }
       // we redirect to external url
+      console.log('URL', { url });
       return res.redirect(url.longUrl);
     })
     .catch(err => res.redirect('/').json({ success: false, message: err }));
