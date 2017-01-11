@@ -47,7 +47,7 @@ const app = new Vue({
         .then(
           res => {
             this.getShort = true;
-            this.url = `http://localhost:3000/${res.data.url.shortUrl}`;
+            this.url = `http://shneed.com/${res.data.url.shortUrl}`;
           },
           err => console.log(err)
         )
