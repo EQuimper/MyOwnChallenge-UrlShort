@@ -1,6 +1,7 @@
 import React from 'react';
+import { truncateText } from '../helpers';
 
-const ListUrls = ({ data, loading, loadingDots, error }) => (
+const ListUrls = ({ data, loading, loadingDots, error, windowSmall }) => (
   <div className="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2" id="list-urls">
     <hr />
     <h5 className="text-center">Last 5 ShortNeed urls.</h5>
@@ -20,10 +21,10 @@ const ListUrls = ({ data, loading, loadingDots, error }) => (
             {data.map((url, i) => (
               <a href={url.shortUrl} className="list-group-item" key={i}>
                 <div className="row">
-                  <div className="col-md-11">
-                    {url.longUrl}
+                  <div className="col-md-11 col-sm-10 col-xs-10">
+                    {windowSmall ? truncateText(url.longUrl, 35) : url.longUrl}
                   </div>
-                  <div className="col-md-1">
+                  <div className="col-md-1 col-sm-2 col-xs-2">
                     {url.visits} <i className="fa fa-line-chart" />
                   </div>
                 </div>

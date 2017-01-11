@@ -17,6 +17,7 @@ class App extends Component {
       valid: false,
       loading: false
     },
+    windowSmall: false,
     list: {
       data: [],
       error: false,
@@ -48,6 +49,14 @@ class App extends Component {
           () => this.setState({ list: { ...this.state.list, error: true, loading: false } })
         );
     }, 1000);
+  }
+  componentDidMount() {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 500) {
+        return this.setState({ windowSmall: true });
+      }
+      return this.setState({ windowSmall: false });
+    });
   }
   _handleSubmit = e => {
     e.preventDefault();
@@ -169,7 +178,7 @@ class App extends Component {
               <Button bsSize="lg" onClick={this._handleReset} bsStyle="warning">Reset</Button>
             </div>
           )}
-          <ListUrls {...list} />
+          <ListUrls {...list} windowSmall={this.state.windowSmall} />
         </div>
       </div>
     );
