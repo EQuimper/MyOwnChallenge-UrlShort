@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "yarn run clean && webpack -p",
+    "build": "NODE_ENV=production yarn run clean && webpack -p",
     "clean": "rimraf dist npm-debug.log.*",
     "start": "cross-env NODE_ENV=production nodemon index.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server"
