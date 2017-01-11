@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Button, InputGroup, Tooltip } from 'react-bootstrap';
 import { isURL } from 'validator';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { getTop5, submitLink } from '../helpers';
 import ListUrls from './ListUrls';
 
-class App extends React.Component {
+class App extends Component {
   static defaultProps = {
     getTop5,
     submitLink
@@ -47,7 +47,7 @@ class App extends React.Component {
           },
           () => this.setState({ list: { ...this.state.list, error: true, loading: false } })
         );
-    }, 2000);
+    }, 1000);
   }
   _handleSubmit = e => {
     e.preventDefault();
@@ -77,7 +77,7 @@ class App extends React.Component {
             url: { ...this.state.url, error: true, loading: false },
           })
         );
-    }, 3000);
+    }, 1000);
   }
   _handleChange = e => {
     this.setState({
