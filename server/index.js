@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
 } else {
   // app.use(express.static(path.join(__dirname, '../dist')));
   app.get('/', (req, res) => {
-    res.sendFile(path.join('../dist/index.html', __dirname));
+    res.sendFile(path.join('../dist/index.html', { root: __dirname }));
   });
   mongoConf = process.env.MONGO_URL;
 }
