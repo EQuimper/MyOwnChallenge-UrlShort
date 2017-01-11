@@ -11,10 +11,10 @@ const PORT = process.env.PORT || 3000;
 let mongoConf;
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-
   mongoConf = 'mongodb://localhost/url';
 } else {
+  require('dotenv').config();
+
   mongoConf = process.env.MONGO_URL;
 }
 
