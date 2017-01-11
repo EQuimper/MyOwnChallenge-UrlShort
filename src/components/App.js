@@ -53,7 +53,6 @@ class App extends Component {
     e.preventDefault();
     this.setState({ url: { ...this.state.url, loading: true } });
     if (!isURL(this.state.url.longUrl)) {
-      console.log('Hello');
       return this.setState({
         url: { ...this.state.url, error: true },
         urlSubmit: true
