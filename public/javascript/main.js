@@ -19,24 +19,20 @@ const app = new Vue({
   mounted: function () {
     $('#btn-short').tooltip();
     new Clipboard('#btn-short');
-    axios.get('/getTop5', {
-      onDownloadProgress: e => {
-        console.log(e.loaded);
-        console.log(e.total);
-        console.log(e);
-        if (e.lengthComputable) {
-          this.loadingPrc = e.loaded / e.total;
-          console.log(this.loadingPrc);
-        }
-      }
-    })
+    axios.get('/getTop5')
       .then(
         res => {
           this.top5Lists = res.data.urls;
-          this.loading = false;
+          const int = setInterval(() => {
+            if (this.loadingPrc === 100) {
+              this.loading = false;
+              clearInterval(int);
+            }
+            this.loadingPrc = this.loadingPrc + 2;
+          }, 20)
         },
         err => {
-          this.loading = false
+          this.loading = false;
           this.error = true;
         }
       )
