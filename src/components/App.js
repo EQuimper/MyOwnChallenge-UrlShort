@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Button, InputGroup, Tooltip } from 'react-bootstrap';
 import { isURL } from 'validator';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { getTop5, submitLink } from '../helpers';
+import { get5Recents, submitLink } from '../helpers';
 import ListUrls from './ListUrls';
 
 class App extends Component {
   static defaultProps = {
-    getTop5,
+    get5Recents,
     submitLink
   }
   state = {
@@ -37,7 +37,7 @@ class App extends Component {
       });
     }, 300);
     return setTimeout(() => {
-      this.props.getTop5()
+      this.props.get5Recents()
         .then(
           res => {
             this.setState({
@@ -135,7 +135,6 @@ class App extends Component {
                     <CopyToClipboard text={this.state.url.longUrl} onCopy={this._handleCopy}>
                       <InputGroup.Button>
                         <Button
-                          type="submit"
                           bsStyle="success"
                           bsSize="lg"
                         >

@@ -43,7 +43,7 @@ export const createShort = (req, res) => {
 export const redirectLong = (req, res) => {
   const { shortUrl } = req.params;
 
-  return Url.findOneAndUpdate({ shortUrl }, { $inc: { visits: 1 } })
+  return Url.findOneAndUpdate({ shortUrl })
     .then(url => {
       // if we dont find a url we redirect back to home page
       if (!url) { return res.redirect('/').json({ success: false, message: 'This url not exist in the system' }); }
@@ -53,9 +53,9 @@ export const redirectLong = (req, res) => {
     .catch(err => res.redirect('/').json({ success: false, message: err }));
 };
 
-export const getTop5 = (req, res) =>
+export const get5Recents = (req, res) =>
   Url.find({})
-    .sort({ visits: -1 })
+    .sort({ createdAt: -1 })
     .limit(5)
     .then(
       urls => res.status(200).json({ success: true, urls }),
