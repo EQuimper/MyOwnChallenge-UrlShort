@@ -21,10 +21,10 @@ const ListUrls = ({ data, loading, loadingDots, error, windowSmall }) => (
             {data.map((url, i) => (
               <a href={url.shortUrl} className="list-group-item" key={i}>
                 <div className="row">
-                  <div className="col-md-11 col-sm-10 col-xs-10">
+                  <div className="col-md-10 col-sm-10 col-xs-9">
                     {windowSmall ? truncateText(url.longUrl, 35) : url.longUrl}
                   </div>
-                  <div className="col-md-1 col-sm-2 col-xs-2">
+                  <div className="col-md-2 col-sm-2 col-xs-3">
                     {url.visits} <i className="fa fa-line-chart" />
                   </div>
                 </div>
